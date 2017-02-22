@@ -6,17 +6,18 @@ var bodyParser = require('body-parser');
 var hostname = 'localhost';
 
 //set port
-var port = 3001;
+var port = 3041;
 
 //create instance of express
 var app = express();
+app.use(morgan('dev'));
 
 var dRouter = express.Router();
 dRouter.use(bodyParser.json());
 
 dRouter.route('/')
 .all(function(req,res,next){
-  res.write(200,{'Content-Type':'text/plain'});
+  res.writeHead(200,{'Content-Type':'text/plain'});
   next();
 
 })
