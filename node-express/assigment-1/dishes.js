@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var hostname = 'localhost';
 
 //set port
-var port = 3044;
+var port = 3046;
 
 //create instance of express
 var app = express();
@@ -44,11 +44,10 @@ dRouter.route('/:dishId')
   .put(function(req,res,next){
       res.write('We are updating the dish: ' + req.params.dishId + '\n');
       res.end('Will update the dish: ' + req.body.name + ' with details: ' + req.body.description);
+  }).
+  delete(function(req,res,next){
+      res.end("Deleting dish: " + req.params.dishId);
   });
-
-
-
-
 
 //Attach Router
 app.use('/dishes',dRouter);
