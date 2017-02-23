@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var hostname = 'localhost';
 
 //set port
-var port = 3041;
+var port = 3044;
 
 //create instance of express
 var app = express();
@@ -15,6 +15,7 @@ app.use(morgan('dev'));
 var dRouter = express.Router();
 dRouter.use(bodyParser.json());
 
+//For collections
 dRouter.route('/')
 .all(function(req,res,next){
   res.writeHead(200,{'Content-Type':'text/plain'});
@@ -31,9 +32,27 @@ dRouter.route('/')
   res.end("Deleting all dishes");
 });
 
+//For item
+dRouter.route('/:dishId')
+  .all(function(req,res,next){
+      res.writeHead(200, {'Content-Type':'text/plain'});
+      next();
+  })
+  .get(function(req,res,next){
+      res.end('Will send details about the dish: ' + req.params.dishId + ' for you');
+  })
+  .put(function(req,res,next){
+      res.write('We are updating the dish: ' + req.params.dishId + '\n');
+      res.end('Will update the dish: ' + req.body.name + ' with details: ' + req.body.description);
+  });
+
+
+
+
+
 //Attach Router
 app.use('/dishes',dRouter);
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + "/public"));
 
 
 app.listen(port,hostname,function(){
