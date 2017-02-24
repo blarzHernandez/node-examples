@@ -1,0 +1,5 @@
+{
+	"name":"New Dish", "description":"something description",
+	"promName":"New Promotion", "promDescription":"Something about promotion description",
+	"leadName":"Leadership name", "leadDescription":"Something about leadership"
+}
