@@ -1,19 +1,7 @@
 var express = require('express');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-
-//Set hostname
-var hostname = 'localhost';
-
-//set port
-var port = 3046;
-
 //create instance of express
 var app = express();
-app.use(morgan('dev'));
-
 var dRouter = express.Router();
-dRouter.use(bodyParser.json());
 
 //For collections
 dRouter.route('/')
@@ -48,12 +36,3 @@ dRouter.route('/:dishId')
   delete(function(req,res,next){
       res.end("Deleting dish: " + req.params.dishId);
   });
-
-//Attach Router
-app.use('/dishes',dRouter);
-app.use(express.static(__dirname + "/public"));
-
-
-app.listen(port,hostname,function(){
-  console.log(`Server running at http://${hostname}:${port}`);
-});
