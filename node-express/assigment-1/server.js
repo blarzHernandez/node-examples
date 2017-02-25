@@ -1,22 +1,23 @@
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var disRouter = require('./dishRouter.js')
 
-//create instance of express
+var dishRouter = require('./dishRouter.js');
+var promRouter = require('./promRouter.js');
+var leadRouter = require('./leaderRouter.js');
+
 var app = express();
-var dRouter = express.Router();
+app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 //Set hostname
 var hostname = 'localhost';
-
 //set port
-var port = 3046;
-app.use(morgan('dev'));
-dRouter.use(bodyParser.json());
-//Attach Router
-app.use('/dishes',disRouter);
+var port = 3000;
 
+app.use('/dishes',dishRouter);//Dishes
+app.use('/promotions',promRouter);//promotions
+app.use('/leadership', leadRouter); // leadership
 
 
 app.listen(port,hostname,function(){

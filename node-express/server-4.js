@@ -3,7 +3,7 @@ var morgan = require('morgan');
 var bodyParser = require("body-parser");
 
 var hostname = 'localhost';
-var port = 3031;
+var port = 3037;
 var app = express();
 
 
@@ -15,14 +15,15 @@ dishRouter.use(bodyParser.json());
 //Use Router
 dishRouter.route('/')
 .all(function(req,res,next){
-  res.write(200,{'Content-Type':'text/plain'});
+  res.writeHead(200,{'Content-Type':'text/plain'});
   next();
 })
 .get(function(req,res,next){
   res.end("Will send all the dishes to you!");
 })
 .post(function(req,res,next){
-  res.end("Will add the dish: " + req.body.name + " with details : " + req.body.description)
+
+  res.end("Will add the dish: " + req.body.description + " with details : " + req.body.description)
 
 })
 .delete(function(req,res, next){
@@ -55,5 +56,5 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.listen(port,hostname,function(){
-console.log(`Server running at http://${hostname}:${port}`);
+console.log(`Server running at http://${hostname}:${port}/`);
 });
